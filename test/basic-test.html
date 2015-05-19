@@ -1,0 +1,93 @@
+<html>
+	<head>
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+		<script src="../../web-component-tester/browser.js"></script>
+		<link rel="import" href="../validate-string.html" />
+	</head>
+	<body>
+
+		<validate-string id="no-validators"></validate-string>
+		<validate-string id="array-values-match"   input="a string" accepted-values='["a string", "another string"]'></validate-string>
+		<validate-string id="array-values-nomatch" input="a string" accepted-values='["different string", "another string"]'></validate-string>
+		<validate-string id="regex-match"          input="a string"  accepted-regex='^a string$'></validate-string>
+		<validate-string id="regex-nomatch"        input="a string"  accepted-regex='^no-match$'></validate-string>
+
+		<script>
+			suite('<validate-string>', function() {
+				suite('input rejections', function() {
+					test('check null is rejected', function() {
+						var el = document.getElementById('no-validators');
+						el.input = null;
+						assert.equal(el.output, null);
+						assert.equal(el.isValid, false);
+					});
+
+					test('check false is rejected', function() {
+						var el = document.getElementById('no-validators');
+						el.input = false;
+						assert.equal(el.output, null);
+						assert.equal(el.isValid, false);
+					});
+
+					test('check a number is rejected', function() {
+						var el = document.getElementById('no-validators');
+						el.input = 0.5;
+						assert.equal(el.output, null);
+						assert.equal(el.isValid, false);
+					});
+
+					test('check an array is rejected', function() {
+						var el = document.getElementById('no-validators');
+						el.input = ['an array'];
+						assert.equal(el.output, null);
+						assert.equal(el.isValid, false);
+					});
+
+					test('check an object is rejected', function() {
+						var el = document.getElementById('no-validators');
+						el.input = { a: 'an object' };
+						assert.equal(el.output, null);
+						assert.equal(el.isValid, false);
+					});
+				});
+
+				suite('no-validation scenario', function() {
+					test('check plain string input with no validators', function() {
+						var el = document.getElementById('no-validators');
+						el.input = 'a string';
+						assert.equal(el.output, 'a string');
+						assert.equal(el.isValid, true);
+					});
+				});
+
+				suite('acceptedValues validations', function() {
+					test('check plain string input with array of accepted values', function() {
+						var el = document.getElementById('array-values-match');
+						assert.equal(el.output, 'a string');
+						assert.equal(el.isValid, true);
+					});
+
+					test('check plain string input with against non-matching accepted values', function() {
+						var el = document.getElementById('array-values-nomatch');
+						assert.equal(el.output, null);
+						assert.equal(el.isValid, false);
+					});
+				});
+
+				suite('acceptedRegex validation', function() {
+					test('check plain string input with regex validator', function() {
+						var el = document.getElementById('regex-match');
+						assert.equal(el.output, 'a string');
+						assert.equal(el.isValid, true);
+					});
+
+					test('check plain string input against non-matching regex', function() {
+						var el = document.getElementById('regex-nomatch');
+						assert.equal(el.output, null);
+						assert.equal(el.isValid, false);
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

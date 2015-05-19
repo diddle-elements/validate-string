@@ -1,0 +1,33 @@
+{
+  "name": "validate-string",
+  "version": "0.0.1",
+  "authors": [
+    "Daniel Llewellyn <daniel@bowlhat.net>"
+  ],
+  "main": "validate-string.html",
+  "keywords": [
+    "web-components",
+    "validation",
+    "validator",
+    "string",
+    "regex",
+    "enum"
+  ],
+  "license": "MIT",
+  "homepage": "http://diddledan.github.io/validation-proxy",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "demo"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.9.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^0.9.3",
+    "web-component-tester": "*"
+  }
+}
