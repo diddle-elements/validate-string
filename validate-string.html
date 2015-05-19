@@ -3,8 +3,8 @@
 <dom-module id="validate-string"></dom-module>
 <script>
 	/**
-	 * This component will validate the `input` attribute against either the `accepedValues`
-	 * array or a regular exdpression. When validatino succeeds it will return the `input`
+	 * This component will validate the `input` attribute against either the `acceptedValues`
+	 * array or a regular expression. When validation succeeds it will return the `input`
 	 * value via an `ouput` attribute for further databinding. Also has an `isValid` boolean
 	 * attribute for use when the actual value is not required.
 	 *
@@ -27,7 +27,7 @@
 				value: function() { return []; }
 			},
 			/**
-			 * stores a filtered version of the specified array of acceptible values
+			 * stores a filtered version of the specified array of acceptable values
 			 */
 			_filteredValues: {
 				type: Array,
@@ -42,14 +42,14 @@
 				value: ''
 			},
 			/**
-			 * takes-in the string to validate
+			 * takes in the string to validate
 			 */
 			input: {
 				type: String,
 				value: ''
 			},
 			/**
-			 * outputs either the `input` value, when validation succeeds, or otherwise null
+			 * outputs either the `input` value when validation succeeds, or otherwise null
 			 */
 			output: {
 				type: String,
