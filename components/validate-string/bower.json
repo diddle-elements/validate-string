@@ -1,0 +1,30 @@
+{
+  "name": "validate-string",
+  "version": "0.0.1",
+  "authors": [
+    "Daniel Llewellyn <daniel@bowlhat.net>"
+  ],
+  "keywords": [
+    "polymer",
+    "web-component",
+    "validation",
+    "validator",
+    "string",
+    "regex",
+    "enum"
+  ],
+  "main": "validate-string.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "http://diddledan.github.io/validate-string",
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.1.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  }
+}
