@@ -4,30 +4,27 @@
   "authors": [
     "Daniel Llewellyn <daniel@bowlhat.net>"
   ],
-  "main": "validate-string.html",
   "keywords": [
-    "web-components",
+    "polymer",
+    "web-component",
     "validation",
     "validator",
     "string",
     "regex",
     "enum"
   ],
-  "license": "MIT",
-  "homepage": "http://diddledan.github.io/validation-proxy",
+  "main": "validate-string.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "http://diddledan.github.io/validate-string",
   "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests",
-    "demo"
+    "/.*",
+    "/test/"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^0.9.0"
+    "polymer": "Polymer/polymer#^1.1.0"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^0.9.3",
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "web-component-tester": "*"
   }
 }
