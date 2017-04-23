@@ -1,61 +1,38 @@
-# validate-string
+# \<validate-string\>
 
-An element providing a starting point for your own reusable Polymer elements.
+Validate an input string and supply it to an output if it conforms to the test
 
+## Install the Polymer-CLI
 
-## Dependencies
+First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
 
-Element dependencies are managed via [Bower](http://bower.io/). You can
-install that via:
+## Viewing Your Application
 
-    npm install -g bower
+```
+$ polymer serve
+```
 
-Then, go ahead and download the element's dependencies:
+## Building Your Application
 
-    bower install
+```
+$ polymer build
+```
 
+This will create a `build/` folder with `bundled/` and `unbundled/` sub-folders
+containing a bundled (Vulcanized) and unbundled builds, both run through HTML,
+CSS, and JS optimizers.
 
-## Playing With Your Element
+You can serve the built versions by giving `polymer serve` a folder to serve
+from:
 
-If you wish to work on your element in isolation, we recommend that you use
-[Polyserve](https://github.com/PolymerLabs/polyserve) to keep your element's
-bower dependencies in line. You can install it via:
+```
+$ polymer serve build/bundled
+```
 
-    npm install -g polyserve
+## Running Tests
 
-And you can run it via:
+```
+$ polymer test
+```
 
-    polyserve
-
-Once running, you can preview your element at
-`http://localhost:8080/components/validate-string/`, where `validate-string` is the name of the directory containing it.
-
-
-## Testing Your Element
-
-Simply navigate to the `/test` directory of your element to run its tests. If
-you are using Polyserve: `http://localhost:8080/components/validate-string/test/`
-
-### web-component-tester
-
-The tests are compatible with [web-component-tester](https://github.com/Polymer/web-component-tester).
-Install it via:
-
-    npm install -g web-component-tester
-
-Then, you can run your tests on _all_ of your local browsers via:
-
-    wct
-
-#### WCT Tips
-
-`wct -l chrome` will only run tests in chrome.
-
-`wct -p` will keep the browsers alive after test runs (refresh to re-run).
-
-`wct test/some-file.html` will test only the files you specify.
-
-
-## Yeoman support
-
-If you'd like to use Yeoman to scaffold your element that's possible. The official [`generator-polymer`](https://github.com/yeoman/generator-polymer) generator has a [`seed`](https://github.com/yeoman/generator-polymer#seed) subgenerator.
+Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>validate-string test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../validate-string.html">
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <validate-string></validate-string>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="array-values-match">
+      <template>
+    		<validate-string input="a string" accepted-values='["a string", "another string"]'></validate-string>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="array-values-nomatch">
+      <template>
+  		  <validate-string input="a string" accepted-values='["different string", "another string"]'></validate-string>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="regex-match">
+      <template>
+      	<validate-string input="a string" accepted-regex='^a string$'></validate-string>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="regex-nomatch">
+      <template>
+        <validate-string input="a string" accepted-regex='^no-match$'></validate-string>
+      </template>
+    </test-fixture>
+
+		<script>
+			suite('validate-string', function() {
+        test('instantiating the element works', function() {
+          var element = fixture('basic');
+          assert.equal(element.is, 'validate-string');
+        });
+				
+        suite('input rejections', function() {
+					test('check null is rejected', function() {
+						var el = fixture('basic');
+						el.input = null;
+						assert.equal(el.output, null);
+						assert.equal(el.isValid, false);
+					});
+
+					test('check false is rejected', function() {
+						var el = fixture('basic');
+						el.input = false;
+						assert.equal(el.output, null);
+						assert.equal(el.isValid, false);
+					});
+
+					test('check a number is rejected', function() {
+						var el = fixture('basic');
+						el.input = 0.5;
+						assert.equal(el.output, null);
+						assert.equal(el.isValid, false);
+					});
+
+					test('check an array is rejected', function() {
+						var el = fixture('basic');
+						el.input = ['an array'];
+						assert.equal(el.output, null);
+						assert.equal(el.isValid, false);
+					});
+
+					test('check an object is rejected', function() {
+						var el = fixture('basic');
+						el.input = { a: 'an object' };
+						assert.equal(el.output, null);
+						assert.equal(el.isValid, false);
+					});
+				});
+
+				suite('with no validators', function() {
+					test('check plain string input with no validators', function() {
+						var el = fixture('basic');
+						el.input = 'a string';
+						assert.equal(el.output, 'a string');
+						assert.equal(el.isValid, true);
+					});
+				});
+
+				suite('with acceptedValues', function() {
+					test('check plain string input with array of accepted values', function() {
+						var el = fixture('array-values-match');
+						assert.equal(el.output, 'a string');
+						assert.equal(el.isValid, true);
+					});
+
+					test('check plain string input with against non-matching accepted values', function() {
+						var el = fixture('array-values-nomatch');
+						assert.equal(el.output, null);
+						assert.equal(el.isValid, false);
+					});
+				});
+
+				suite('with acceptedRegex', function() {
+					test('check plain string input with regex validator', function() {
+						var el = fixture('regex-match');
+						assert.equal(el.output, 'a string');
+						assert.equal(el.isValid, true);
+					});
+
+					test('check plain string input against non-matching regex', function() {
+						var el = fixture('regex-nomatch');
+						assert.equal(el.output, null);
+						assert.equal(el.isValid, false);
+					});
+				});
+			});
+		</script>
+  </body>
+</html>
