@@ -2,16 +2,18 @@
   "name": "validate-string",
   "description": "Validate an input string and supply it to an output if it conforms to the test",
   "main": "validate-string.html",
-  "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0"
-  },
   "keywords": [
+    "web-components",
     "validation",
     "validator",
     "string",
     "regex",
     "enum"
   ],
+  "license": "MIT",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0"
+  },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
