@@ -1,6 +1,10 @@
 {
   "name": "validate-string",
   "description": "Validate an input string and supply it to an output if it conforms to the test",
+  "version": "0.0.2",
+  "authors": [
+    "Daniel Llewellyn <daniel@bowlhat.net>"
+  ],
   "main": "validate-string.html",
   "keywords": [
     "web-components",
