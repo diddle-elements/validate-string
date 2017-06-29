@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../polymer/polymer-element.html" />
 
 <dom-module id="validate-string"></dom-module>
 <script>
@@ -10,77 +10,86 @@
 	 *
 	 * Example:
 	 *
+	 * ```
 	 * <validate-string input='[[myValue]]'
-	 * 				   output='{{validatedValue}}'
-	 * 				 is-valid='{{saveThisSomewhereElse}}'
-	 * 		   acceptedValues='["possible match 1", "possible match 2", ...]'>
+	 *                 output='{{validatedValue}}'
+	 *               is-valid='{{saveThisSomewhereElse}}'
+	 *         acceptedValues='["possible match 1", "possible match 2", ...]'>
 	 * </validate-string>
+	 * ```
+	 *
+	 * @demo demo/index.html
+	 * @test test/index.html
 	 */
-	Polymer({
-		is: "validate-string",
-		properties: {
-			/**
-			 * sets an optional array of acceptible values for `input`
-			 */
-			acceptedValues: {
-				type: Array,
-				value: function() { return []; }
-			},
-			/**
-			 * stores a filtered version of the specified array of acceptable values
-			 */
-			_filteredValues: {
-				type: Array,
-				value: function() { return []; },
-				computed: '_filter(acceptedValues)'
-			},
-			/**
-			 * specifies an optional regular expression the `input` should be validated against
-			 */
-			acceptedRegex: {
-				type: String,
-				value: ''
-			},
-			/**
-			 * takes in the string to validate
-			 */
-			input: {
-				type: String,
-				value: ''
-			},
-			/**
-			 * outputs either the `input` value when validation succeeds, or otherwise null
-			 */
-			output: {
-				type: String,
-				value: '',
-				notify: true,
-				computed: '_validateIt(input, _filteredValues, acceptedRegex)'
-			},
-			/**
-			 * indicates whether the most-recent validation attempt succeeded or not
-			 */
-			isValid: {
-				type: Boolean,
-				value: false,
-				readOnly: true,
-				notify: true
-			},
-			/**
-			 * indicates for internal use whether the array option has been specified and is valid
-			 */
-			_haveArrayValues: {
-				type: Boolean,
-				computed: '_notEmptyZeroOrNull(_filteredValues)'
+	class ValidateString extends Polymer.Element {
+		static get is() { return 'validate-string'; }
+
+		static get properties() {
+			return {
+				/**
+				 * sets an optional array of acceptible values for `input`
+				 */
+				acceptedValues: {
+					type: Array,
+					value: function() { return []; }
+				},
+				/**
+				 * stores a filtered version of the specified array of acceptable values
+				 */
+				_filteredValues: {
+					type: Array,
+					value: function() { return []; },
+					computed: '_filter(acceptedValues)'
+				},
+				/**
+				 * specifies an optional regular expression the `input` should be validated against
+				 */
+				acceptedRegex: {
+					type: String,
+					value: ''
+				},
+				/**
+				 * takes in the string to validate
+				 */
+				input: {
+					type: String,
+					value: ''
+				},
+				/**
+				 * outputs either the `input` value when validation succeeds, or otherwise null
+				 */
+				output: {
+					type: String,
+					value: '',
+					notifies: true,
+					computed: '_validateIt(input, _filteredValues, acceptedRegex)'
+				},
+				/**
+				 * indicates whether the most-recent validation attempt succeeded or not
+				 */
+				isValid: {
+					type: Boolean,
+					value: false,
+					readOnly: true,
+					notifies: true
+				},
+				/**
+				 * indicates for internal use whether the array option has been specified and is valid
+				 */
+				_haveArrayValues: {
+					type: Boolean,
+					computed: '_notEmptyZeroOrNull(_filteredValues)'
+				}
 			}
-		},
+		}
+
 		/**
 		 * Iterates over the input array values creating a new array with empty values removed
 		 *
 		 * @param {array} array the array of values to filter empty values from
 		 * @return {array} returns a copy of the input array with empty values removed
 		 */
-		_filter: function(array) {
+		_filter(array) {
 			var host = this;
 			var newArray = [];
 			if (host._notEmptyZeroOrNull(array)) {
@@ -91,14 +100,15 @@
 				});
 			}
 			return newArray;
-		},
+		}
+
 		/**
 		 * Helper function to check for non-empty values. Used by `_filter`.
 		 *
 		 * @param {object} value an arbitrary value to check
 		 * @return {boolean} return value is `true` if the input value is non-empty
 		 */
-		_notEmptyZeroOrNull: function(value) {
+		_notEmptyZeroOrNull(value) {
 			if (value === null || value === false) {
 				return false;
 			}
@@ -109,7 +119,8 @@
 				return (value !== '') ? true : false;
 			}
 			return true;
-		},
+		}
+
 		/**
 		 * The meat of the component.
 		 *
@@ -123,7 +134,7 @@
 		 * @param {string} regex the regular expression as a string to test against the `input` string
 		 * @return {string} output returns the `input` value when validation succeeds or otherwise null
 		 */
-		_validateIt: function(input, values, regex) {
+		_validateIt(input, values, regex) {
 			var valid = false;
 			if (typeof input === 'string' && input != '') {
 				if (values !== null && values.length > 0) {
@@ -146,5 +157,7 @@
 			this._setIsValid(false);
 			return null;
 		}
-	});
+	}
+
+	customElements.define(ValidateString.is, ValidateString);
 </script>
